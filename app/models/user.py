@@ -16,6 +16,8 @@ class User(db.Model, UserMixin):
 
     pref_lang = db.Column(db.String, nullable=False)
 
+    conversations = db.relationship('Conversation', back_populates="participants")
+
     @property
     def password(self):
         return self.hashed_password

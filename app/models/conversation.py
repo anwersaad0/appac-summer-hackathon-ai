@@ -10,7 +10,6 @@ class Conversation(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    #participants = db.Column(ARRAY(Unicode))
     participants = db.relationship('User', back_populates="conversations")
 
     messages = db.relationship('Message', back_populates="conversation", cascade="all, delete orphan")
