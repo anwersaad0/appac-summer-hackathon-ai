@@ -9,8 +9,11 @@ class Conversation(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    participants = db.Column(ARRAY(Unicode))
-    messages = db.Column(ARRAY(Unicode))
+
+    #participants = db.Column(ARRAY(Unicode))
+    participants = db.relationship('User', back_populates="conversations")
+
+    messages = db.relationship('Message', back_populates="conversation", cascade="all, delete orphan")
 
     def to_dict(self):
         return {

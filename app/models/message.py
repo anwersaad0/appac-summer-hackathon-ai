@@ -1,4 +1,5 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
+from sqlalchemy.schema import ForeignKey
 
 class Message(db.Model):
 
@@ -10,11 +11,13 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String, nullable=False)
 
-    #user_id
-    #convo_id
+    user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id')))
+    convo_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('conversations.id')))
 
     def to_dict(self):
         return {
             'id': self.id,
             'content': self.content,
+            'userId': self.user_id,
+            'convoId': self.convo_id,
         }
