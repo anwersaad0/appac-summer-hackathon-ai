@@ -1,7 +1,7 @@
 from app import app
 from app.websocket import socketio
 import os
-environment = os.getenv('FLASK_ENV')
+environment = os.getenv('FLASK_DEBUG')
 
 cors_list = [] if environment == 'production' else [
     'http://localhost:5173', 
