@@ -2,6 +2,8 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+from .user_convo import user_convo
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -16,7 +18,7 @@ class User(db.Model, UserMixin):
 
     pref_lang = db.Column(db.String, nullable=False)
 
-    conversations = db.relationship('Conversation', back_populates="participants")
+    conversations = db.relationship('Conversation', secondary=user_convo, back_populates="participants")
 
     @property
     def password(self):
