@@ -23,3 +23,13 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/edit/<int:id>', methods=['PUT'])
+@login_required
+def change_pref_lang(id):
+    user = User.query.get(id)
+
+    if not user:
+        return {"error": "Incorrect user!"}
+    
+    
