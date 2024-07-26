@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import User, db
+from app.forms import EditUser
 
 user_routes = Blueprint('users', __name__)
 
@@ -32,4 +33,15 @@ def change_pref_lang(id):
     if not user:
         return {"error": "Incorrect user!"}
     
+    form = EditUser()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        user.prefLang = form.data['pref_lang']
+
+        db.session.commit()
+        return user.to_dict()
+    
+    return {"errors": form.errors}
+
     
