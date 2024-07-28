@@ -18,7 +18,7 @@ def view_conversation(id):
 
     return convo.to_dict()
 
-@conversation_routes.route('/<int:id>/message')
+@conversation_routes.route('/<int:id>/message', methods=["POST"])
 @login_required
 def send_message(id):
     convo = Conversation.query.get(id)

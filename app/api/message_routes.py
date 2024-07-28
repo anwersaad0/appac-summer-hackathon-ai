@@ -25,3 +25,5 @@ def edit_message(id):
         return message.to_dict()
     
     return {"errors": form.errors}
+
+#delete message route to be done later
