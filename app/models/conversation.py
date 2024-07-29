@@ -14,7 +14,7 @@ class Conversation(db.Model):
 
     participants = db.relationship('User', secondary=user_convo, back_populates="conversations")
 
-    messages = db.relationship('Message', back_populates="conversation", cascade="all, delete orphan")
+    messages = db.relationship('Message', back_populates="conversation", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
