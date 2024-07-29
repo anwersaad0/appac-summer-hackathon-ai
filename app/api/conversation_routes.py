@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, Message, Conversation, db
-from app.forms import NewMessage
+from app.forms import NewMessage, NewConversation
 
 conversation_routes = Blueprint('conversations', __name__)
 
@@ -42,6 +42,30 @@ def send_message(id):
 @conversation_routes.route('/new', methods=["POST"])
 @login_required
 def start_conversation():
-    #form here
+    form = NewConversation()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        convo = Conversation(
+            name = form.data['name']
+            #something for participants
+            )
+        
+        db.session.add(convo)
+        db.session.commit()
+        return convo.to_dict()
     
-    return {'errors'}
+    return {'errors': form.errors}
+
+@conversation_routes.route('/delete/<int:id>', methods=["DELETE"])
+@login_required
+def delete_conversation(id):
+    convo = Conversation.query.get(id)
+
+    if current_user.id in convo.participants:
+        db.session.delete(convo)
+        db.session.commit()
+        return "Delete Successful"
+    else:
+        return "Must be a participant to delete."

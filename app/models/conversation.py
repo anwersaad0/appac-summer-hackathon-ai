@@ -12,6 +12,8 @@ class Conversation(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
+    name = db.Column(db.String(30), nullable=False, default='Conversation')
+
     participants = db.relationship('User', secondary=user_convo, back_populates="conversations")
 
     messages = db.relationship('Message', back_populates="conversation", cascade="all, delete orphan")

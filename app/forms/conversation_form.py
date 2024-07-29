@@ -3,4 +3,4 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 
 class NewConversation(FlaskForm):
-    ex = ""
+    name = StringField("Name of Conversation", validators=[DataRequired()])
