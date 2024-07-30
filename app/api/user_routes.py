@@ -3,6 +3,9 @@ from flask_login import login_required
 from app.models import User, db
 from app.forms import EditUser
 
+from aws_image_helpers import get_unique_image_filename, upload_file_to_s3
+from sqlalchemy import select
+
 user_routes = Blueprint('users', __name__)
 
 
@@ -27,7 +30,7 @@ def user(id):
 
 @user_routes.route('/edit/<int:id>', methods=['PUT'])
 @login_required
-def change_pref_lang(id):
+def edit_profile(id):
     user = User.query.get(id)
 
     if not user:
@@ -37,7 +40,12 @@ def change_pref_lang(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        user.prefLang = form.data['pref_lang']
+        pfp = form.data['profile_pic']
+        pfp.filename = get_unique_image_filename(pfp.filename)
+        pfp_upload = upload_file_to_s3(pfp)
+
+        user.pref_lang = form.data['pref_lang']
+        user.profile_pic = pfp_upload['url']
 
         db.session.commit()
         return user.to_dict()

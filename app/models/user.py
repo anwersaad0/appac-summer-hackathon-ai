@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     pref_lang = db.Column(db.String, nullable=False)
+    profile_pic = db.Column(db.String)
 
     conversations = db.relationship('Conversation', secondary=user_convo, back_populates="participants")
 
@@ -36,5 +37,6 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'prefLang': self.pref_lang
+            'prefLang': self.pref_lang,
+            'profilePic': self.profile_pic,
         }
