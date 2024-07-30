@@ -16,7 +16,11 @@ class Conversation(db.Model):
 
     participants = db.relationship('User', secondary=user_convo, back_populates="conversations")
 
+<<<<<<< HEAD
+    messages = db.relationship('Message', back_populates="conversation", cascade="all, delete-orphan")
+=======
     messages = db.relationship('Message', back_populates="conversations", cascade="all, delete-orphan")
+>>>>>>> 2291d3ef80d4fa659a8b06e6e3eba50f0793f4c9
 
     def to_dict(self):
         return {
