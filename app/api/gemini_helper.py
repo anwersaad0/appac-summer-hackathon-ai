@@ -12,4 +12,7 @@ def translation_request(lang, message):
     prompt = f"Translate this message into {lang}: {message}"
     response = model.generate_content(prompt)
 
+    #print(response.text)
     return response
+
+#translation_request('spanish', 'Did you get my message yet?')
