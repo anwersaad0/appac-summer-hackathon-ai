@@ -12,7 +12,7 @@ const SignUp = () =>{
     });
 
 
-    const handleLangCheckbox = (language: string) =>{
+    const handleLangCheckbox = (language: "EN" | "SP") =>{
         setInputs({...inputs, prefLang: language})
     }
 
@@ -76,7 +76,7 @@ const SignUp = () =>{
               />
             </div>
             {/* PREFERRED LANGUAGE CHECKBOX */}
-            <LanguageCheckBox onCheckboxChange={handleLangCheckbox} selectedLanguage={inputs.prefLang} />
+            <LanguageCheckBox onCheckboxChange={handleLangCheckbox} selectedLang={inputs.prefLang} />
             <Link to="/login" className="text-sm hover:underline hover:text-orange-600 mt-2 inline-block text-white">
                 Already have an account? Log in
             </Link>
