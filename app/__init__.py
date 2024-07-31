@@ -44,15 +44,6 @@ CORS(app)
 # Therefore, we need to make sure that in production any
 # request made over http is redirected to https.
 # Well.........
-@app.before_request
-def simple_cors():
-    if request.method.lower() == 'options':
-        response = Response()
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
-        response.headers['Access-Control-Allow-Headers'] = 'content-type'
-        return response
-
 
 @app.before_request
 def https_redirect():
