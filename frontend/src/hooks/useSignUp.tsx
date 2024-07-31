@@ -20,11 +20,12 @@ const useSignUp = ( ) => {
       const success = handleInputErrors(inputs);
       if(!success) return;
 
-      const res = await fetch("http://127.0.0.1:8000/api/signup/", {
+      const res = await fetch("http://localhost:8000/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify(inputs),
       });
 
