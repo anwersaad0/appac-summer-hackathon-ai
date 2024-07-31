@@ -20,7 +20,7 @@ const useSignUp = ( ) => {
       const success = handleInputErrors(inputs);
       if(!success) return;
 
-      const res = await fetch("SIGNUP", {
+      const res = await fetch("/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
