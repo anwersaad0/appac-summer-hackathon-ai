@@ -15,6 +15,7 @@ class Message(db.Model):
     convo_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('conversations.id')))
 
     conversation = db.relationship("Conversation", back_populates='messages')
+    sender = db.relationship("User", back_populates='messages')
 
     def to_dict(self):
         return {

@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     profile_pic = db.Column(db.String)
 
     conversations = db.relationship('Conversation', secondary=user_convo, back_populates="participants")
+    messages = db.relationship('Message', back_populates='sender', cascade="all, delete-orphan")
 
     @property
     def password(self):
