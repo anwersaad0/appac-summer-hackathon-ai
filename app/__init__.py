@@ -54,7 +54,6 @@ def simple_cors():
         return response
 
 
-
 @app.before_request
 def https_redirect():
     if os.environ.get('FLASK_DEBUG') == 'production':
