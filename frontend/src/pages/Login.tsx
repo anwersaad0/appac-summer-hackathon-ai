@@ -65,7 +65,7 @@ const Login = () => {
             Don't have an account?
           </Link>
           <div>
-            <button className="btn btn-block btn-sm mt-2">Login</button>
+            <button className="btn btn-block btn-sm mt-2" data-test="cypress-loginbtn">Login</button>
           </div>
         </form>
       </div>
