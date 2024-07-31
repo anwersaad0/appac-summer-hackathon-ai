@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, Message, Conversation, db
-from app.forms import NewMessage, NewConversation
+from app.forms import NewMessage, NewConversation, EditConversation
 
 conversation_routes = Blueprint('conversations', __name__)
 
@@ -57,6 +57,26 @@ def start_conversation():
         return convo.to_dict()
     
     return {'errors': form.errors}
+
+@conversation_routes.route('/edit/<int:id>', methods=["PUT"])
+@login_required
+def change_convo_name(id):
+    convo = Conversation.query.get(id)
+
+    if not convo:
+        return {"error": "You aren't in this conversation!"}
+    
+    form = EditConversation()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        convo.name = form.data['name']
+
+        db.session.commit()
+        return convo.to_dict()
+    
+    return {'errors': form.errors}
+
 
 @conversation_routes.route('/delete/<int:id>', methods=["DELETE"])
 @login_required

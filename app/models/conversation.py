@@ -21,6 +21,7 @@ class Conversation(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'name': self.name,
             'participants': self.participants,
             'messages': self.messages,
         }
