@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LanguageCheckBox from "../components/signup/LanguageCheckBox";
 import { Link } from "react-router-dom";
+import useSignUp from "../hooks/useSignUp";
 
 const SignUp = () =>{
 
@@ -10,17 +11,19 @@ const SignUp = () =>{
         password: '',
         prefLang: ''
     });
+    const {loading, signup} = useSignUp();
 
-
-    const handleLangCheckbox = (language: string) =>{
+    const handleLangCheckbox = (language: "EN" | "SP") =>{
         setInputs({...inputs, prefLang: language})
     }
 
 
 
-    const handleSubmit = () =>{
-
-    }
+    const handleSubmit = (e: React.FormEvent) =>{
+        e.preventDefault();
+        console.log(inputs);
+        signup(inputs)
+    };
 
     return (
       <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
@@ -76,14 +79,14 @@ const SignUp = () =>{
               />
             </div>
             {/* PREFERRED LANGUAGE CHECKBOX */}
-            <LanguageCheckBox onCheckboxChange={handleLangCheckbox} selectedLanguage={inputs.prefLang} />
+            <LanguageCheckBox onCheckboxChange={handleLangCheckbox} selectedLang={inputs.prefLang} />
             <Link to="/login" className="text-sm hover:underline hover:text-orange-600 mt-2 inline-block text-white">
                 Already have an account? Log in
             </Link>
 
             <div>
-                <button className="btn btn-block btn-sm mt-2 border border-slate-700 text-orange-500 hover:bg-orange-500 hover:text-white">
-                    Sign Up
+                <button className="btn btn-block btn-sm mt-2 border border-slate-700 text-orange-500 hover:bg-orange-500 hover:text-white" disabled={loading}>
+                    {loading ? "Loading..." : "Sign Up"}
                 </button>
             </div>
           </form>
