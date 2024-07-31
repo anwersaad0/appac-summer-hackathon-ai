@@ -9,10 +9,16 @@ model = genai.GenerativeModel('gemini-1.5-flash')
 
 
 def translation_request(lang, message):
-    prompt = f"Translate this message into {lang}: {message}"
-    response = model.generate_content(prompt)
+    prompt = f"Translate this message into {lang} without extra options: {message}"
+    res = model.generate_content(prompt)
 
-    #print(response.text)
-    return response
+    print(res.text)
+    return res
 
-#translation_request('spanish', 'Did you get my message yet?')
+def transliteration_request(lang, message):
+    prompt = f"Provide an English Transliteration of this message in {lang} without extra options: {message}"
+    res = model.generate_content(prompt)
+
+    print(res.text)
+
+transliteration_request('Japanese', 'Did you get my last text?')
