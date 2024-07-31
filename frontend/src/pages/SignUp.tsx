@@ -74,7 +74,7 @@ const SignUp = () =>{
                 value={inputs.password}
                 className="w-full input input-bordered h-10"
                 onChange={(e) =>
-                  setInputs({ ...inputs, email: e.target.value })
+                  setInputs({ ...inputs, password: e.target.value })
                 }
               />
             </div>
