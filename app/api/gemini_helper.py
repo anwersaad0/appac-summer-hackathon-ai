@@ -9,7 +9,7 @@ model = genai.GenerativeModel('gemini-1.5-flash')
 
 
 def translation_request(lang, message):
-    prompt = f"Translate this message into {lang}: {message}"
+    prompt = f"Translate this message into {lang} without extra options: {message}"
     response = model.generate_content(prompt)
 
     #print(response.text)
