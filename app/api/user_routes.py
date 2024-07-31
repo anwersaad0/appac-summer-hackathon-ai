@@ -3,7 +3,7 @@ from flask_login import login_required
 from app.models import User, db
 from app.forms import EditUser
 
-from aws_image_helpers import get_unique_image_filename, upload_file_to_s3
+from ..api.aws_image_helpers import get_unique_image_filename, upload_file_to_s3
 from sqlalchemy import select
 
 user_routes = Blueprint('users', __name__)
