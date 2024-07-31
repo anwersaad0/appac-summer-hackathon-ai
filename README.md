@@ -20,4 +20,3 @@ to make a branch up to date
 2. Fetch the latest changes from the remote repository --> git fetch origin
 3. Merge the latest changes from the main branch into your branch --> git merge origin/main
 4. Push the updated branch to the remote repository --> git push origin your-branch-name
-
