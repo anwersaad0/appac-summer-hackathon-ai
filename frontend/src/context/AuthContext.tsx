@@ -1,4 +1,5 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState, } from 'react';
+import toast from 'react-hot-toast';
 
 // We create the Type here so we TS knows what to expect for authUser
 type AuthUserType = {
@@ -38,7 +39,7 @@ export const AuthContextProvider = ({children}:{children:ReactNode}) =>{
 
             try{
                 // we try to get the user: ourselves, and we parse it
-                const res = await fetch("ROUTE");
+                const res = await fetch(null);
                 const data = await res.json();
 
                 // if there is an error, we throw it so it falls in the catch
@@ -50,12 +51,12 @@ export const AuthContextProvider = ({children}:{children:ReactNode}) =>{
                 setAuthUser(data)
 
             }catch(error:any){
+                toast.error(error)
                 console.error(error);
             }finally{
                 setIsLoading(false);
             }
         }
-
 
         fetchAuthUser();
     },[]);
