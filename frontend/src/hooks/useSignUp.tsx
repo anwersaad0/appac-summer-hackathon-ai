@@ -20,7 +20,7 @@ const useSignUp = ( ) => {
       const success = handleInputErrors(inputs);
       if(!success) return;
 
-      const res = await fetch("SIGNUP", {
+      const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,8 +32,10 @@ const useSignUp = ( ) => {
 
       if (!res.ok) throw new Error(data.error);
       setAuthUser(data);
+
     } catch (error: any) {
       toast.error(error.message);
+      console.error(error.message);
     } finally {
       setLoading(false);
     }
