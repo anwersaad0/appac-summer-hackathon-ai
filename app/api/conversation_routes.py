@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 from app.models import User, Message, Conversation, db
 from app.forms import NewMessage, NewConversation, EditConversation
 
+from ..api.gemini_helper import translation_request
+
 conversation_routes = Blueprint('conversations', __name__)
 
 @conversation_routes.route('/')
@@ -17,6 +19,13 @@ def view_conversation(id):
     convo = Conversation.query.get(id)
 
     return convo.to_dict()
+
+@conversation_routes.route('/<int:id>/messages')
+@login_required
+def translate_messages(id):
+    convo = Conversation.query.get(id)
+
+    return {'messages': [translation_request(current_user.pref_lang, message) for message in convo.messages]}
 
 @conversation_routes.route('/<int:id>/message', methods=["POST"])
 @login_required
