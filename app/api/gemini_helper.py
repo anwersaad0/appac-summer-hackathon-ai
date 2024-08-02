@@ -12,13 +12,15 @@ def translation_request(lang, message):
     prompt = f"Translate this message into {lang} without extra options: {message}"
     response = model.generate_content(prompt)
 
-    print(response.text)
+    #print(response.text)
     return response
 
-def transliteration_request(lang, message):
-    prompt = f"Provide an English Transliteration of this message in {lang} without extra options: {message}"
-    res = model.generate_content(prompt)
+def transliteration_request(message):
+    prompt = f"Provide an English Transliteration of this message without extra options: {message}"
+    response = model.generate_content(prompt)
 
-    print(res.text)
+    #print(response.text)
+    return response
 
-translation_request('Chinese', 'Did you get my last text?')
+#translation_request('English', '前のメッセージ届いた？ ')
+#transliteration_request('前のメッセージ届いた？ ')
