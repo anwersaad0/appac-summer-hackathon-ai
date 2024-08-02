@@ -21,4 +21,4 @@ def transliteration_request(lang, message):
 
     print(res.text)
 
-transliteration_request('Japanese', 'Did you get my last text?')
+translation_request('Chinese', 'Did you get my last text?')
