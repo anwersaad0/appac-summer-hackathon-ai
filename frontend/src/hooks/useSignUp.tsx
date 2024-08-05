@@ -31,6 +31,7 @@ const useSignUp = ( ) => {
       const data = await res.json();
 
       if (!res.ok) throw new Error(data.error);
+
       setAuthUser(data);
 
     } catch (error: any) {

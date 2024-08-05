@@ -15,15 +15,16 @@ const useLogin = () =>{
 
         setLoading(true)
 
-        const res = await fetch("/auth/login", {
+        const res = await fetch("api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type" : "application/json'",
-                body: JSON.stringify({username, password})
+                body: JSON.stringify({"username": username, "password":password})
             }
         })
-
+        console.log("LOGIN RES", res);
         const data = await res.json();
+        console.log("LOGIN DATA", data);
 
         if(!res.ok){
             throw new Error(data.error);

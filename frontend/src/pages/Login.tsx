@@ -14,7 +14,6 @@ const Login = () => {
 
   const handleLogin = (e: React.FormEvent) =>{
     e.preventDefault();
-
     login(inputs.username, inputs.password)
   }
 
@@ -37,6 +36,7 @@ const Login = () => {
               type="text"
               placeholder="Enter username"
               className="w-full input input-bordered h-10"
+              value={inputs.username}
               onChange={(e) =>
                 setInputs({ ...inputs, username: e.target.value })
               }
@@ -51,6 +51,7 @@ const Login = () => {
               type="text"
               placeholder="Enter password"
               className="w-full input input-bordered h-10"
+              value={inputs.password}
               onChange={(e) =>
                 setInputs({ ...inputs, password: e.target.value })
               }
