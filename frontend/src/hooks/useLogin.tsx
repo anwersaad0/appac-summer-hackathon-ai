@@ -14,13 +14,15 @@ const useLogin = () =>{
         try{
 
         setLoading(true)
+            console.log(username, password, "THESE ARE VALUES");
 
-        const res = await fetch("api/auth/login", {
+        const inputs = {username, password}
+        const res = await fetch("/api/auth/login", {
             method: "POST",
             headers: {
-                "Content-Type" : "application/json'",
-                body: JSON.stringify({"username": username, "password":password})
-            }
+                "Content-Type" : "application/json",
+            },
+            body: JSON.stringify(inputs)
         })
         console.log("LOGIN RES", res);
         const data = await res.json();
