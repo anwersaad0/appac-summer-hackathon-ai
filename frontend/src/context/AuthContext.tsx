@@ -6,7 +6,6 @@ type AuthUserType = {
     id: string;
     username: string;
     email: string;
-    password: string;
     prefLang: string;
     profilePic: string;
 }
