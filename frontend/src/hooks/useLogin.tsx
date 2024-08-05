@@ -14,19 +14,15 @@ const useLogin = () =>{
         try{
 
         setLoading(true)
-            console.log(username, password, "THESE ARE VALUES");
 
-        const inputs = {username, password}
         const res = await fetch("/api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type" : "application/json",
             },
-            body: JSON.stringify(inputs)
+            body: JSON.stringify({username, password})
         })
-        console.log("LOGIN RES", res);
         const data = await res.json();
-        console.log("LOGIN DATA", data);
 
         if(!res.ok){
             throw new Error(data.error);
@@ -42,8 +38,6 @@ const useLogin = () =>{
     }finally{
         setLoading(false)
     }
-
-
 
     }
 

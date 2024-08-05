@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.models import User, Message, Conversation, db
 from app.forms import NewMessage, NewConversation, EditConversation
 
-from ..api.gemini_helper import translation_request
+from ..api.gemini_helper import translation_request, transliteration_request
 
 conversation_routes = Blueprint('conversations', __name__)
 
