@@ -16,7 +16,7 @@ const useLogOut = () =>{
         try{
 
             setLoading(true)
-            const res = await fetch("LOGOUT");
+            const res = await fetch("/auth/logout");
             const data = await res.json();
     
             if(!res.ok){
