@@ -17,6 +17,8 @@ const LanguageCheckBox = ({
         >
           <span className="label-text text-white">Spanish</span>
           <input
+            data-test="cypress-userPreferSpan"
+
             type="checkbox"
             className="checkbox border-slate-900"
             checked={selectedLang === "SP"}
@@ -32,6 +34,8 @@ const LanguageCheckBox = ({
         >
           <span className="label-text text-white">English</span>
           <input
+            data-test="cypress-userPreferEng"
+
             type="checkbox"
             className="checkbox border-slate-900"
             checked={selectedLang === "EN"}
