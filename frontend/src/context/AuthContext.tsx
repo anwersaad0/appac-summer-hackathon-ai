@@ -40,7 +40,6 @@ export const AuthContextProvider = ({children}:{children:ReactNode}) =>{
                 // we try to get the user: ourselves, and we parse it
                 const res = await fetch("/api/auth/");
                 const data = await res.json();
-                console.log("AUTH DATAA", data);
                 // if there is an error, we throw it so it falls in the catch
                 if(!res.ok){
                     throw new Error("Not logged in");
@@ -51,8 +50,8 @@ export const AuthContextProvider = ({children}:{children:ReactNode}) =>{
                 setAuthUser(data)
 
             }catch(error:any){
-                toast.error(JSON.stringify(error));
-                console.log("ERRORRRR", JSON.stringify(error));
+                toast.error(error);
+                console.error(error);
             }finally{
                 setIsLoading(false);
             }
