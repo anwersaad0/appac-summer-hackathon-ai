@@ -67,7 +67,6 @@ const SignUp = () => {
             </label>
             <input
               data-test="cypress-userPasswordInput"
-
               type="password"
               placeholder="Enter your password"
               value={inputs.password}
@@ -79,6 +78,7 @@ const SignUp = () => {
           </div>
           {/* PREFERRED LANGUAGE CHECKBOX */}
           <LanguageCheckBox
+            data-test="cypress-preferedLang"
             onCheckboxChange={handleLangCheckbox}
             selectedLang={inputs.prefLang}
           />
@@ -91,6 +91,7 @@ const SignUp = () => {
 
           <div>
             <button
+              data-test="cypress-signupBtn"
               className="btn btn-block btn-sm mt-2 border border-slate-700 text-orange-500 hover:bg-orange-500 hover:text-white"
               disabled={loading}
             >

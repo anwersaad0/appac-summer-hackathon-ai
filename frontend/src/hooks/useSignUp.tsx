@@ -53,11 +53,14 @@ function handleInputErrors({username, email, password, prefLang}:SignUpInputs):b
     }
 
     if (password.length < 8) {
+
       toast.error("Password must be at least 6 characters long");
       return false;
     }
 
     if (username.length < 8) {
+      console.log("Error: Username too short"); // Debugging
+
       toast.error("Username must have at least 8 characters");
       return false;
     }
