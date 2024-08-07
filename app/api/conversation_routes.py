@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, Message, Conversation, db
 from app.forms import NewMessage, NewConversation, EditConversation
+from datetime import date
 
 from ..api.gemini_helper import translation_request, transliteration_request
 
@@ -10,7 +11,7 @@ conversation_routes = Blueprint('conversations', __name__)
 @conversation_routes.route('/')
 @login_required
 def get_conversations():
-    convos = Conversation.query.filter(current_user.id in Conversation.participants)
+    convos = Conversation.query.filter(current_user.id in conversation.participants for conversation in Conversation.query.all())
     return {'conversations': [conversation.to_dict() for conversation in convos]}
 
 @conversation_routes.route('/<int:id>')
@@ -38,6 +39,7 @@ def send_message(id):
     if form.validate_on_submit():
         message = Message(
             content = form.data['content'],
+            created_at = date.today(),
             user_id = current_user.id,
             convo_id = convo.id
         )

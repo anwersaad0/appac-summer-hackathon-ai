@@ -10,6 +10,7 @@ class Message(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
 
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id')))
     convo_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('conversations.id')))
@@ -21,6 +22,7 @@ class Message(db.Model):
         return {
             'id': self.id,
             'content': self.content,
+            'createdAt': self.created_at,
             'userId': self.user_id,
             'convoId': self.convo_id,
         }
