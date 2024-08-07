@@ -51,24 +51,40 @@ def send_message(id):
     
     return {"errors": form.errors}
 
+# @conversation_routes.route('/new', methods=["POST"])
+# @login_required
+# def start_conversation():
+#     form = NewConversation()
+
+#     form['csrf_token'].data = request.cookies['csrf_token']
+
+#     if form.validate_on_submit():
+#         convo = Conversation(
+#             name = form.data['name']
+#             #something for participants
+#             )
+        
+#         db.session.add(convo)
+#         db.session.commit()
+#         return convo.to_dict()
+    
+#     return {'errors': form.errors}
+
 @conversation_routes.route('/new', methods=["POST"])
 @login_required
-def start_conversation():
-    form = NewConversation()
+def start_conversation(recip_id):
+    convo = Conversation.query.filter(current_user.id in Conversation.participants and recip_id in Conversation.participants)
 
-    form['csrf_token'].data = request.cookies['csrf_token']
+    if convo:
+        return {"error": "this conversation already exists"}
+    else:
+        new_convo = Conversation(
+            participants = [current_user.id, recip_id]
+        )
 
-    if form.validate_on_submit():
-        convo = Conversation(
-            name = form.data['name']
-            #something for participants
-            )
-        
-        db.session.add(convo)
+        db.session.add(new_convo)
         db.session.commit()
-        return convo.to_dict()
-    
-    return {'errors': form.errors}
+        return new_convo.to_dict()
 
 @conversation_routes.route('/edit/<int:id>', methods=["PUT"])
 @login_required

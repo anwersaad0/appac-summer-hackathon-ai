@@ -12,7 +12,7 @@ class Conversation(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    name = db.Column(db.String(30), nullable=False, default='Conversation')
+    #name = db.Column(db.String(30), nullable=False, default='Conversation')
 
     participants = db.relationship('User', secondary=user_convo, back_populates="conversations")
 
@@ -21,7 +21,7 @@ class Conversation(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'name': self.name,
+            #'name': self.name,
             'participants': self.participants,
             'messages': self.messages,
         }
