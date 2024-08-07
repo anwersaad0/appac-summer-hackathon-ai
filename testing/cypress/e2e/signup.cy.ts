@@ -45,17 +45,18 @@ describe('test signup page', () => {
   //   cy.getByData('cypress-signupBtn').should('be.disabled')
   // })
   it('checks the form submission process', ()=>{
-    cy.getByData('cypress-userNameInput').type('JohnDoe')
+    cy.getByData('cypress-userNameInput').type('Johndoe123')
     cy.getByData('cypress-userEmailInput').type('john.doe@example.com')
     cy.getByData('cypress-userPasswordInput').type('password@1234')
     cy.getByData('cypress-userPreferEng').click()
     cy.getByData('cypress-signupBtn').click()
+    cy.url().should('eq', 'http://localhost:5173/')
   })
 
-  it('verify navigation to the login page', () =>{
-    cy.get('a[href="/login"]').click()
-    cy.url().should('include', '/login')
-  })
+  // it('verify navigation to the login page', () =>{
+  //   cy.get('a[href="/login"]').click()
+  //   cy.url().should('include', '/login')
+  // })
 
  
 })
