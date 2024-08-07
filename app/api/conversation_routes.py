@@ -14,19 +14,20 @@ def get_conversations():
     convos = Conversation.query.filter(current_user.id in conversation.participants for conversation in Conversation.query.all())
     return {'conversations': [conversation.to_dict() for conversation in convos]}
 
+@conversation_routes.route('/<int:id>/messages')
+@login_required
+def get_messages(id):
+    convo = Conversation.query.get(id)
+    messages = Message.query.filter(Message.convo_id == convo.id)
+
+    return {'messages': [message.to_dict for message in messages]}
+
 @conversation_routes.route('/<int:id>')
 @login_required
 def view_conversation(id):
     convo = Conversation.query.get(id)
 
     return convo.to_dict()
-
-@conversation_routes.route('/<int:id>/messages')
-@login_required
-def translate_messages(id):
-    convo = Conversation.query.get(id)
-
-    return {'messages': [translation_request(current_user.pref_lang, message) for message in convo.messages]}
 
 @conversation_routes.route('/<int:id>/message', methods=["POST"])
 @login_required
