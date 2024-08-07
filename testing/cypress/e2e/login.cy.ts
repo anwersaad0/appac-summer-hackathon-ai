@@ -1,9 +1,12 @@
 describe('test login page', () => {
-  it('passes', () => {
-    cy.visit('http://localhost:5173/login')
-    cy.getByData('cypress-loginbtn').should('be.visible').contains('Login')
-    cy.get('a').should('be.visible').contains("Don't have an account?").click()
-    cy.location("pathname").should("equal", "/signup")
-
+  beforeEach(()=>{
+    cy.visit("http://localhost:5173/login")
+  });
+  it('checks the forem submission process and navigation', () => {
+   
+    cy.getByData('cypress-inputUserName').type('Yasmine Elnadi')
+    cy.getByData('cypress-inputPassword').type("Yasmine1234")
+    cy.getByData('cypress-loginbtn').click()
+    cy.url().should('eq','http://localhost:5173/')
   })
 })

@@ -33,6 +33,7 @@ const Login = () => {
               <span className="text-base label-text">Username</span>
             </label>
             <input
+              data-test='cypress-inputUserName'
               type="text"
               placeholder="Enter username"
               className="w-full input input-bordered h-10"
@@ -48,6 +49,7 @@ const Login = () => {
               <span className="text-base label-text">Password</span>
             </label>
             <input
+              data-test='cypress-inputPassword'
               type="text"
               placeholder="Enter password"
               className="w-full input input-bordered h-10"
