@@ -22,19 +22,18 @@ const useLogin = () =>{
             },
             body: JSON.stringify({username, password})
         })
-
         const data = await res.json();
+
         if(!res.ok){
-            console.log("DATA", data);
-            throw data;
+            throw new Error(data.error);
         }
 
         setAuthUser(data);
 
     }catch(error:any){
-        error.errors.forEach((err:string) =>{
-            toast.error(err)
-        })
+
+        toast.error(error.message);
+
 
     }finally{
         setLoading(false)
