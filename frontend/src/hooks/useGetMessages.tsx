@@ -20,15 +20,16 @@ const useGetMessages = () =>{
             setMessages([]);
             // We try to get the messages
             const res = await fetch(`api/convos/`);
-                        console.log(`THIS IS THE RES FROM USEGETMESSAGES`,res);
+            // console.log(`THIS IS THE RES FROM USEGETMESSAGES`,res);
             const data = await res.json();
 
-            console.log(`THIS IS THE DATA FROM USEGETMESSAGES`, data);
+            // console.log(`THIS IS THE DATA FROM USEGETMESSAGES`, data);
             if (!res.ok) {
               throw new Error(data.error);
             }
             // If there are no errors, we set the messages in our store
             setMessages(data);
+
           } catch (error: any) {
             console.error(error.message);
             toast.error(error.message);

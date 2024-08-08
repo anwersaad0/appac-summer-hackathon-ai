@@ -13,19 +13,19 @@ const useLogin = () =>{
 
         try{
 
-        setLoading(true)
+            setLoading(true)
 
-        const res = await fetch("/api/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type" : "application/json",
-            },
-            body: JSON.stringify({username, password})
+            const res = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json",
+                },
+                body: JSON.stringify({username, password})
         })
 
         const data = await res.json();
+        console.log("DATA", data);
         if(!res.ok){
-            console.log("DATA", data);
             throw data;
         }
 
@@ -35,6 +35,9 @@ const useLogin = () =>{
         error.errors.forEach((err:string) =>{
             toast.error(err)
         })
+        // console.log(Array.from(error));
+        // toast.error(error)
+
 
     }finally{
         setLoading(false)
