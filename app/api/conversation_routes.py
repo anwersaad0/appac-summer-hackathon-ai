@@ -14,6 +14,13 @@ def get_conversations():
     convos = Conversation.query.filter(current_user.id in conversation.participants for conversation in Conversation.query.all())
     return {'conversations': [conversation.to_dict() for conversation in convos]}
 
+@conversation_routes.route('/selected')
+@login_required
+def get_convo_by_users(recip_id):
+    convo = Conversation.query.filter(current_user.id in Conversation.participants and recip_id in Conversation.participants)
+
+    return convo.to_dict()
+
 @conversation_routes.route('/<int:id>/messages')
 @login_required
 def get_messages(id):
