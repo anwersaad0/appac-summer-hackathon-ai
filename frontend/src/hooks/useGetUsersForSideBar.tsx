@@ -22,35 +22,17 @@ const useGetUsersForSideBar = () =>{
             try{
                 setLoading(true);
                 // We try to get all the users
-                const res = await fetch(`/api/users/`);
+                const res = await fetch(`/api/messages/conversations`);
                 const data = await res.json();
                 //  If there's a problem, we throw an error to the catch block
-                const arr: any = [];
+
                 if(!res.ok){
                     console.log("INSIDE RES.OK", data)
                     throw new Error(data.error)
                 }
+                
+                setConversations(data);
 
-                console.log("USERS.DATA", data.users);
-                for(let i = 0; i < data.users.length; i++){
-                    let user = data.users[i];
-                    console.log(`THIS IS USER ${i}: ${user}`);
-
-                    let conversation: ConversationType = {
-                      id: user.id,
-                      username: user.username,
-                      profilePic: user.profilePic,
-                    };
-
-                    if(authUser?.id !== user.id){
-                        arr.push(conversation)
-                    }
-
-                }
-                await setConversations(arr);
-
-
-                console.log("THIS IS THE CONVERSATIONS VARIABLE", conversations);
 
             }catch(error:any){
                 // toast displays the error on the UI

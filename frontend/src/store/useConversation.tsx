@@ -12,14 +12,11 @@ import { create } from "zustand";
 //     body: string;
 //     senderId: string;
 //     createdAt: string;
-
 // }
 
-
-
-interface ConversationState{
-    selectedConversation: ConversationType | null;
-    setSelectedConversation: (conversation: ConversationType | null) => void;
+interface ConversationState {
+  selectedConversation: ConversationType | null;
+  setSelectedConversation: (conversation: ConversationType | null) => void;
     messages: MessageType[];
     setMessages: (messages: MessageType[]) => void;
 }

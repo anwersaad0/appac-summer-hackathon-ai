@@ -7,13 +7,46 @@ const Conversation = ({conversation}: {conversation:any}) =>{
     const isOnline = false;
 
     // console.log("THIS IS A SINGLE CONVERSATION", conversation);
+
+  const handleConversation = async () =>{
+    setSelectedConversation(conversation);
+
+    const getConvo = async () =>{
+
+      try{
+        console.log("conversation.id", conversation.id);
+        const res = await fetch(`api/convos/${conversation.id}/new`)
+        console.log("THIS IS CONVERSATION RES", res);
+        const data = await res.json();
+        if(!res.ok){
+          throw new Error(data.error)
+        }
+        console.log(data);
+        setSelectedConversation(data)
+
+
+      }catch(error: any){
+
+        console.error(error)
+      }
+
+    }
+
+    getConvo()
+
+  }
+
+
+
+
+
     return (
       <>
         <div
           className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer ${
             isSelected ? "bg-sky-500" : ""
           }`}
-          onClick={() => setSelectedConversation(conversation)}
+          onClick={handleConversation}
         >
           <div className={`avatar ${isOnline ? "online" : "offline"}`}>
             <div className="w-8 md:w-12 rounded-full">

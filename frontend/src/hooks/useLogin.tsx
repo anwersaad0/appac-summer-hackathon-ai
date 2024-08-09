@@ -24,20 +24,15 @@ const useLogin = () =>{
         })
 
         const data = await res.json();
-        console.log("DATA", data);
         if(!res.ok){
-            throw data;
+            throw new Error(data.error);
         }
 
         setAuthUser(data);
 
     }catch(error:any){
-        error.errors.forEach((err:string) =>{
-            toast.error(err)
-        })
-        // console.log(Array.from(error));
+        console.error(error.message)
         // toast.error(error)
-
 
     }finally{
         setLoading(false)

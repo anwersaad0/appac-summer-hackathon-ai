@@ -65,7 +65,11 @@ const Login = () => {
             Don't have an account?
           </Link>
           <div>
+<<<<<<< HEAD
+            <button className="btn btn-block btn-sm mt-2">{loading ? "Signing in..." : "Log In"}</button>
+=======
             <button className="btn btn-block btn-sm mt-2">Login</button>
+>>>>>>> origin
           </div>
         </form>
       </div>

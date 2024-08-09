@@ -13,7 +13,9 @@ const useLogOut = () =>{
         try{
 
             setLoading(true)
-            const res = await fetch("api/auth/logout");
+            const res = await fetch("/api/auth/logout",{
+                method: "POST"
+            });
             const data = await res.json();
     
 

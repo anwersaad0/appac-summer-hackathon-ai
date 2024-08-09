@@ -7,13 +7,13 @@ const SignUp = () =>{
 
     const [inputs, setInputs] = useState({
         username: '',
-        email: '',
+        // email: '',
         password: '',
         prefLang: ''
     });
     const {loading, signup} = useSignUp();
 
-    const handleLangCheckbox = (language: "EN" | "SP") =>{
+    const handleLangCheckbox = (language: "english" | "spanish") =>{
         setInputs({...inputs, prefLang: language})
     }
 
@@ -21,7 +21,7 @@ const SignUp = () =>{
 
     const handleSubmit = (e: React.FormEvent) =>{
         e.preventDefault();
-        console.log(inputs);
+        console.log("THESE ARE THE INPUTS",inputs);
         signup(inputs)
     };
 
@@ -49,7 +49,7 @@ const SignUp = () =>{
               />
             </div>
             {/* EMAIL INPUT */}
-            <div>
+            {/* <div>
               <label className="label p-2">
                 <span className="text-base label-text text-white">Email</span>
               </label>
@@ -62,7 +62,7 @@ const SignUp = () =>{
                   setInputs({ ...inputs, email: e.target.value })
                 }
               />
-            </div>
+            </div> */}
             {/* PASSWORD INPUT */}
             <div>
               <label className="label p-2">

@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+}
+
+model User{
+  id String @id @default(cuid())
+  username String @unique
+  password String
+  prefLang PrefLang
+  profilePic String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  conversationsIds String[]
+
+
+  // relations
+  conversations Conversation[]
+  messages Message[]
+}
+
+model Conversation{
+  id String @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  participantIds String[]
+  participants User[]
+
+  messageIds String[]
+  messages Message[]
+
+
+}
+
+model Message{
+  id String @id @default(cuid())
+  body String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+
+  // The relations to the other tables
+  conversationId String
+  conversation Conversation @relation(fields:[conversationId], references:[id])
+
+  senderId String
+  sender User @relation(fields:[senderId], references: [id])
+}
+
+enum PrefLang{
+  english
+  spanish
+}
+

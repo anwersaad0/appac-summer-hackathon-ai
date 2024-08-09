@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 type SignUpInputs = {
     username: string;
-    email: string;
+    // email: string;
     password: string;
     prefLang: string;
 }
@@ -16,8 +16,11 @@ const useSignUp = ( ) => {
 
   const signup = async (inputs: SignUpInputs) => {
     try {
+
+      console.log("useSignUpInputs", inputs);
       setLoading(true);
       const success = handleInputErrors(inputs);
+      console.log("success", success);
       if(!success) return;
 
       const res = await fetch("/api/auth/signup", {
@@ -27,7 +30,7 @@ const useSignUp = ( ) => {
         },
         body: JSON.stringify(inputs),
       });
-
+      console.log("useSignUp RES", res);
       const data = await res.json();
 
       if (!res.ok) throw new Error(data.error);
@@ -45,9 +48,9 @@ const useSignUp = ( ) => {
   return { loading, signup };
 };
 
-function handleInputErrors({username, email, password, prefLang}:SignUpInputs):boolean{
+function handleInputErrors({username, /*email,*/ password, prefLang}:SignUpInputs):boolean{
 
-    if(!username || !email || !password || !prefLang){
+    if(!username || /*!email ||*/ !password || !prefLang){
         toast.error("Please make sure to fill all the fields");
         return false;
     }
