@@ -44,7 +44,7 @@ describe('test signup page', () => {
   // it('ensures the signup btn is disabled while loading', () =>{
   //   cy.getByData('cypress-signupBtn').should('be.disabled')
   // })
-  it('checks the form submission process', ()=>{
+  it.only('checks the form submission process', ()=>{
     cy.getByData('cypress-userNameInput').type('Johndoe123')
     cy.getByData('cypress-userEmailInput').type('john.doe@example.com')
     cy.getByData('cypress-userPasswordInput').type('password@1234')

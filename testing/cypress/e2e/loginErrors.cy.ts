@@ -10,6 +10,7 @@ describe("Login page - Non-Existent-User", ()=>{
         }).as('loginRequest')
     })
     it('displays an error for non-existant user',()=>{
+        
         cy.getByData("cypress-inputUserName").type('NonExistentUser')
         cy.getByData("cypress-inputPassword").type('wrongpassword')
         cy.getByData('cypress-loginbtn').click()

@@ -29,6 +29,7 @@ const useSignUp = ( ) => {
       });
 
       const data = await res.json();
+      console.log('dataaaaa', data)
 
       if (!res.ok) throw new Error(data.error);
 
