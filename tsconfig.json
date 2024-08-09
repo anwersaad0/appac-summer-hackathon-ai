@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Specifies what version of ECMAScript the code should compile to
+    "module": "NodeNext" /* Specify what module code is generated. */,
+    "moduleResolution": "NodeNext" /* Specify how TypeScript should resolve module imports. */,
+    "outDir": "./backend/dist" /* Specify an output folder for all emitted files. */,
+    "rootDir": "./backend" /* Specify the root folder within your source files. */,
+    "strict": true /* Enable all strict type-checking options. */,
+    "esModuleInterop": true, // This will allow you to use default imports with CommonJS modules.
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  },
+  "ts-node": {
+    "esm": true //This indicates that the ts-node package will work with EcmaScript modules
+  },
+  "include": ["backend/src/**/*", "backend/bcryptjs.d.ts"], // Specifies which files to include when compiling your project.
+  "exclude": ["node_modules", "**/*.spec.ts", "frontend"] //Specifies which files to exclude when compiling your project.
+}
+// You can save this file as a starter for future projects with this structure
